@@ -8,7 +8,6 @@ from urllib.parse import urlparse, urljoin
 import requests
 
 
-from dataclasses import dataclass
 
 @dataclass
 class Finding:
