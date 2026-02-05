@@ -1,0 +1,41 @@
+# ALEN policy (legal-first, low false-positive by design)
+version: 1.2
+legal:
+  require_authorization: true
+  banner: "I HAVE EXPLICIT AUTHORIZATION to test this target."
+scope:
+  host_only: true        # only scan the provided host (recommended)
+  allow_subdomains: false
+  exclude_paths:
+    - "/logout"
+    - "/delete"
+    - "/admin/delete"
+runtime:
+  rate_limit_rps: 2
+  timeout_http_sec: 12
+  max_pages: 200
+  user_agent: "ALEN/1.2 (Authorized Security Audit)"
+tools:
+  nuclei:
+    enabled: true
+    severities: ["medium","high","critical"]
+  nmap:
+    enabled: true
+    safe_only: true
+  nikto:
+    enabled: true
+    passive_only: true
+  wpscan:
+    enabled: true
+    fingerprint_only: true
+reporting:
+  out_dir: "~/alen-report"
+  formats: ["html","json","md"]
+confidence:
+  require_evidence: true
+  classify:
+    confirmed_requires:
+      - "replay_match"
+      - "consistent_response"
+    indicator_when:
+      - "single_signal"
