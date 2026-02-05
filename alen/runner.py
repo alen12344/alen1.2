@@ -1,17 +1,14 @@
 from __future__ import annotations
 
-import json
 import os
 import re
 import subprocess
-import time
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse
 
-import requests
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeElapsedColumn
 
